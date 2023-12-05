@@ -6,9 +6,9 @@
 package control;
 
 
-import entity.Brand;
+import entity.ItemOnCart;
 import entity.Product;
-import  dao.productDAO;
+import dao.productDAO;
 import dao.itemDAO;
 import entity.Item;
 import java.util.ArrayList;
@@ -44,21 +44,36 @@ public class CartControl extends HttpServlet {
         String cardID = "1";
         List<Item> listItem = dao.getItemByCardID(cardID);
         List<Product> listproduct = new ArrayList<>();
+        List<ItemOnCart> listItemOnCart = new ArrayList<>();
         for (Item I : listItem){
             String idpro = String.valueOf(I.productID);
             Product p = daopro.getProductByID(idpro);
+            ItemOnCart item = new ItemOnCart();
             if(p != null) {
                 listproduct.add(p);
+                item.productID = p.productID;
+                item.title = p.title;
+                item.price = p.price;
+                item.color = p.color;
+                item.ram = p.ram;
+                item.url = p.url1;
+                item.quantity = I.quantity;
+                listItemOnCart.add(item);
             }
             else {
                 Product pro = new Product();
                 pro.productID = I.productID;
                 pro.title = "Sản phẩm đã hết hàng hoặc đã bị xóa khỏi danh sách sản phẩm.";
                 pro.url1 = "image/hethang.png";
+                item.productID = pro.productID;
+                item.url = pro.url1;
+                item.title = pro.title;
+                item.quantity = I.quantity;
                 listproduct.add(pro);
+                listItemOnCart.add(item);
             }
         }
-        request.setAttribute("listpro", listproduct);
+        request.setAttribute("listpro", listItemOnCart);
 
 
         request.getRequestDispatcher("Cart.jsp").forward(request, response);

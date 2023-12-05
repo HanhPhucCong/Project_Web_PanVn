@@ -29,7 +29,7 @@
                         <div class="row">
                             <div class="col-lg-3 col-md-12 mb-4 mb-lg-0">
                                 <div class="bg-image hover-overlay hover-zoom ripple rounded" data-mdb-ripple-color="light">
-                                    <img src="${product.url1}" class="w-100" alt="Blue Jeans Jacket" />
+                                    <img src="${product.url}" class="w-100" alt="Blue Jeans Jacket" />
                                     <a href="#!">
                                         <div class="mask" style="background-color: rgba(251, 251, 251, 0.2)"></div>
                                     </a>
@@ -53,7 +53,7 @@
                                     </button>
 
                                     <div class="form-outline">
-                                        <input id="form1" min="0" name="quantity" value="1" type="number" class="form-control" />
+                                        <input id="form1" min="0" name="quantity" value="${product.quantity}" type="number" class="form-control" />
                                         <label class="form-label" for="form1">Quantity</label>
                                     </div>
 
@@ -61,7 +61,6 @@
                                       <i class="fas fa-plus"></i>
                                     </button>
                                 </div>
-
                                 <p class="text-start text-md-center">
                                     <strong>${product.price}</strong>
                                 </p>
