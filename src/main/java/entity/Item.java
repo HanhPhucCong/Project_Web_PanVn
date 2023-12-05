@@ -1,34 +1,34 @@
 package entity;
 
 public class Item {
-    private int cartItemID;
-
-    private Product product;
-    private int quantity;
+    public int cartID;
+    public int productID;
+    public int quantity;
 
     public Item() {
     }
 
-    public Item(Product product, int quantity) {
-        this.product = product;
+    public Item(int cartID, int productID, int quantity) {
+        this.cartID = cartID;
+        this.productID = productID;
         this.quantity = quantity;
     }
 
     // Getters and Setters
     public int getCartItemID() {
-        return cartItemID;
+        return cartID;
     }
 
-    public void setCartItemID(int cartItemID) {
-        this.cartItemID = cartItemID;
+    public void setCartItemID(int cartID) {
+        this.cartID = cartID;
     }
 
-    public Product getProduct() {
-        return product;
+    public int getProductID() {
+        return productID;
     }
 
-    public void setProduct(Product product) {
-        this.product = product;
+    public void setProductID(int productID) {
+        this.productID = productID;
     }
 
     public int getQuantity() {
@@ -42,8 +42,8 @@ public class Item {
     @Override
     public String toString() {
         return "Item{" +
-                "cartItemID=" + cartItemID +
-                ", product=" + product +
+                "cartItemID=" + cartID +
+                ", product=" + productID +
                 ", quantity=" + quantity +
                 '}';
     }

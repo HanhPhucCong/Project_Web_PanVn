@@ -8,6 +8,7 @@ public class Cart {
 
     private int userID;
 
+
     private List<Item> items;
 
     // Constructors
@@ -33,6 +34,7 @@ public class Cart {
     public void setUserID(int userID) {
         this.userID = userID;
     }
+
 
     public List<Item> getItems() {
         return items;

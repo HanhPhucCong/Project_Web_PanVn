@@ -9,9 +9,11 @@ package control;
 import entity.Brand;
 import entity.Product;
 import  dao.productDAO;
-import dao.brandDAO;
-import java.io.IOException;
+import dao.itemDAO;
+import entity.Item;
+import java.util.ArrayList;
 import java.util.List;
+import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -24,7 +26,6 @@ import javax.servlet.http.HttpServletResponse;
  */
 @WebServlet(name = "CartControl", urlPatterns = {"/cart"})
 public class CartControl extends HttpServlet {
-
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -37,18 +38,31 @@ public class CartControl extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        //b1: get data from dao
-       productDAO dao = new productDAO();
-       brandDAO data = new brandDAO();
-        List<Product> list = dao.getAllProduct();
-        List<Product> lastfive = dao.getfiveLast();
-        List<Brand> listB =  data.getAllBrand();
-        request.setAttribute("listP", list);
-        request.setAttribute("five", lastfive);
-        request.setAttribute("listB", listB);
+
+        itemDAO dao = new itemDAO();
+        productDAO daopro = new productDAO();
+        String cardID = "1";
+        List<Item> listItem = dao.getItemByCardID(cardID);
+        List<Product> listproduct = new ArrayList<>();
+        for (Item I : listItem){
+            String idpro = String.valueOf(I.productID);
+            Product p = daopro.getProductByID(idpro);
+            if(p != null) {
+                listproduct.add(p);
+            }
+            else {
+                Product pro = new Product();
+                pro.productID = I.productID;
+                pro.title = "Sản phẩm đã hết hàng hoặc đã bị xóa khỏi danh sách sản phẩm.";
+                pro.url1 = "image/hethang.png";
+                listproduct.add(pro);
+            }
+        }
+        request.setAttribute("listpro", listproduct);
+
+
         request.getRequestDispatcher("Cart.jsp").forward(request, response);
-        //404 -> url
-        //500 -> jsp properties
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

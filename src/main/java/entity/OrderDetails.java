@@ -4,12 +4,9 @@ public class OrderDetails {
 
     private int orderDetailID;
 
-
     private int quantity;
 
-
     private double totalPrice;
-
 
     private String note;
 
